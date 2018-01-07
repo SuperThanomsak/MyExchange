@@ -29,12 +29,26 @@ public class MainFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-            // Exchange Controller
+//        Update Factor
+        updateFactor();
+
+
+        // Exchange Controller
         exchangeController();
 
 
 
     } //main Method
+
+    private void updateFactor() {
+        String tag = "7JanV1";
+        try {
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }// update Factor
 
     private void exchangeController() {
         Button button = getView().findViewById(R.id.btnExchange);
@@ -54,7 +68,7 @@ public class MainFragment extends Fragment{
 //                    No Space
                     double moneyAdouble = Double.parseDouble(moneyString);
                     double answerAdouble = moneyAdouble / fatorADouble;
-
+// Conver กลับไปเป็น String
                     String myAnswerString = String.format(moneyString,"%,.2f", answerAdouble);
 
                     String answerString = "Your Dolla--->"+ myAnswerString + " USD";
