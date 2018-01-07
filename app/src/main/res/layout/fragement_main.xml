@@ -30,7 +30,10 @@
 
             <!--Text field-->
             <EditText
-android:gravity="right"
+                android:id="@+id/edtMoney"
+                android:textColorHint="#ffffff"
+                android:textColor="#ffffff"
+                android:gravity="right"
                 android:inputType="number"
                 android:hint="Thai Bath"
                 android:layout_width="match_parent"
@@ -42,12 +45,14 @@ android:gravity="right"
         <!--Exchange Button-->
 
         <Button
+            android:id="@+id/btnExchange"
             android:text="Exchange"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!--Show Rate Button-->
         <Button
+            android:id="@+id/btnShowRate"
             android:text="Show Rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
