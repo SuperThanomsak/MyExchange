@@ -2,6 +2,7 @@ package jcn.dyndns.org.myexchange.utility;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -33,8 +34,9 @@ public class MyGetRateFromAPI extends AsyncTask<String,Void,String>{
             Request request = builder.url(strings[0]).build();
             Response response = okHttpClient.newCall(request).execute();
             return response.body().string();
+
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("7JanV1", "e=" + e.toString());
             return null;
         }
     }

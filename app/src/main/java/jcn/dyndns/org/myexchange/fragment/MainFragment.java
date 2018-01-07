@@ -3,16 +3,21 @@ package jcn.dyndns.org.myexchange.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.Format;
 
 import jcn.dyndns.org.myexchange.R;
 import jcn.dyndns.org.myexchange.utility.MyAlert;
+import jcn.dyndns.org.myexchange.utility.MyGetRateFromAPI;
 
 /**
  * Created by Thanomsak-NB on 06/01/2561.
@@ -21,8 +26,8 @@ import jcn.dyndns.org.myexchange.utility.MyAlert;
 public class MainFragment extends Fragment{
 
     // Explicit
-    private double fatorADouble =33.00; // Constance Rate USD --> THB
-
+    private double fatorADouble =33.00; // Constance Rate USD --> TH
+    private String dateString;
 
 
     @Override
@@ -41,8 +46,42 @@ public class MainFragment extends Fragment{
     } //main Method
 
     private void updateFactor() {
+
         String tag = "7JanV1";
+        String urlJson = "https://api.fixer.io/latest?symbols=THB&base=USD";
+
         try {
+
+            MyGetRateFromAPI myGetRateFromAPI = new MyGetRateFromAPI(getActivity());
+            myGetRateFromAPI.execute(urlJson);
+            String jsonString = myGetRateFromAPI.get();
+            jsonString = "[" + jsonString + "]";
+
+
+            Log.d(tag, " JSON -->"+jsonString);
+
+            JSONArray jsonArray = new JSONArray(jsonString);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            dateString = jsonObject.getString("date");
+            Log.d(tag, "date --> " + dateString);
+
+            String rateString = jsonObject.getString("rates");
+            rateString = "[" + rateString + "]";
+            Log.d(tag, "rateString -->" + rateString);
+
+            JSONArray jsonArray1 = new JSONArray(rateString);
+            JSONObject jsonObject1 =jsonArray1.getJSONObject(0);
+            String factorStrin = jsonObject1.getString("THB");
+            Log.d(tag, "factor => " + factorStrin);
+
+            fatorADouble = Double.parseDouble(factorStrin);
+
+
+
+
+
+
 
         } catch (Exception e){
             e.printStackTrace();
